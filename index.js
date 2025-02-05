@@ -9,7 +9,7 @@ app.use(express.json());
 app.post('/api/tradingview-buy', (req, res) => {
     console.log(req.originalUrl);
     console.log(req.body);
-    res.send(req);
+    res.send("TV Buy!");
 });
 
 app.post('/api/tradingview-sell', (req, res) => {
