@@ -1,29 +1,29 @@
 require("dotenv").config();
 const express = require("express");
+const serverless = require("serverless-http");
 
-const app =express();
+const app = express();
 
 app.use(express.json());
 
-app.use('/tradingview-buy', (req, res, next) => {
-    console.log(req.originalurl);
-    console.log(req.body) ;
-    res.send("TV Buy!" );
+app.post('/api/tradingview-buy', (req, res) => {
+    console.log(req.originalUrl);
+    console.log(req.body);
+    res.send("TV Buy!");
 });
 
-app.use('/tradingview-sell', (req, res, next) => {
-    console.log(req.originalurl);
-    console.log(req.body) ;
-    res.send("TV Sell!" );
+app.post('/api/tradingview-sell', (req, res) => {
+    console.log(req.originalUrl);
+    console.log(req.body);
+    res.send("TV Sell!");
 });
 
-app.use('/', (req, res, next) => {
-    console.log(req.originalurl);
-    console.log(req.body) ;
-    res.send("Hello World" );
+app.get('/api/', (req, res) => {
+    console.log(req.originalUrl);
+    console.log(req.body);
+    res.send("Hello World");
 });
 
-
-app.listen(process.env.PORT, () => {
-    console.log(`Server is running on port ${process.env.PORT}`);
-});
+// Exporta para o Vercel
+module.exports = app;
+module.exports.handler = serverless(app);
